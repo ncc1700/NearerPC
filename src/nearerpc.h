@@ -2,7 +2,8 @@
 #define NEARERPC_H_INCLUDED
 
 
-
+#include <stddef.h>
+#include <stdint.h>
 
 
 

@@ -14,8 +14,6 @@ static inline boolean check_if_valid_register(uint64_t reg){
 }
 
 static inline boolean begin_virtual_machine(VmProgram* program){
-    program->vmMem.memory = (uint64_t*)malloc(program->vmMem.memorySize * sizeof(uint64_t));
-    if(program->vmMem.memory == NULL) return FALSE;
     memset(program->registers, 0, REG_AMOUNT * sizeof(uint64_t));
     if(program->vmCode.codeSize == 0){
         uint64_t* arr = program->vmCode.code;
@@ -31,9 +29,6 @@ static inline boolean begin_virtual_machine(VmProgram* program){
 }
 
 static inline void end_virtual_machine(VmProgram* program, char* reason){
-    if(program->vmMem.memory != NULL){
-        free((uint64_t*)program->vmMem.memory);
-    }
     program->programCounter = 0;
     program->vmCode.codeSize = 0;
     program->isCurrentlyRunning = FALSE;
@@ -57,6 +52,7 @@ boolean vm_execute_program(VmProgram* program){
         uint64_t arg2 = program->vmCode.code[program->programCounter + 2];
         uint64_t arg3 = program->vmCode.code[program->programCounter + 3];
 
+        // prepare for the massive switch statement that composes this entire "processor"
         switch(op){
             case OP_ADD:{
                 if(check_if_valid_register(arg1) == FALSE ||

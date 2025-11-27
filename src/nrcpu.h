@@ -17,7 +17,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "nearerpc.h"
-
+#include "nrmemory.h"
 
 #define REG_AMOUNT 16
 
@@ -43,10 +43,7 @@ typedef enum _VmOpCodes {
     OP_CMPLT,
 } VmOpCodes;
 
-typedef struct _VmMemory {
-    uint64_t* memory;
-    size_t memorySize;
-} VmMemory;
+
 
 typedef struct _VmCode {
     uint64_t* code;
