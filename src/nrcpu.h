@@ -53,11 +53,16 @@ typedef struct _VmCode {
 
 typedef struct _VmProgram {
     boolean isCurrentlyRunning;
-    uint64_t registers[REG_AMOUNT];
     VmMemory vmMem;
     VmCode vmCode;
+    int8_t privliegeLevel;
     size_t programCounter;
 } VmProgram;
+
+typedef struct _VmCPU {
+    uint64_t registers[REG_AMOUNT];
+    VmMemory globalMemory; // not used, might be used later
+} VmCPU;
 
 
 boolean vm_execute_program(VmProgram* program);

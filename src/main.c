@@ -27,10 +27,9 @@ int main(){
         OP_HALT, 0, 0, 0
     };
     VmCode vmCode = {code, 0};
-    VmProgram program;
-    program.isCurrentlyRunning = FALSE;
-    program.vmCode = vmCode;
-    program.vmMem = vm_return_system_memory();
+    VmProgram program = {FALSE, vm_return_system_memory(), vmCode, 4, 0};
+    program.privliegeLevel = 4;
+
     vm_execute_program(&program);
     vm_free_vm_memory();
 }
