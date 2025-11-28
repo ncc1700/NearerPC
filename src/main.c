@@ -28,7 +28,6 @@ int main(){
     };
     VmCode vmCode = {code, 0};
     VmProgram program = {FALSE, vm_return_system_memory(), vmCode, 4, 0};
-    program.privliegeLevel = 4;
 
     vm_execute_program(&program);
     vm_free_vm_memory();

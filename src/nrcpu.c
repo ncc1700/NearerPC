@@ -134,7 +134,7 @@ boolean vm_execute_program(VmProgram* program){
             case OP_VMCALL:{
                 // this instruction exists just for debugging the NearerPC Virtual Machine
                 // because of this it is in a privliege level that is higher then usual
-                if(program->privliegeLevel == 4){
+                if(program->privliegeLevel < 4){
                     end_virtual_machine(program, "Invalid operation for privliege level");
                     return FALSE;
                 }
@@ -266,6 +266,7 @@ boolean vm_execute_program(VmProgram* program){
                 } else {
                     vmCPU.registers[arg1] = 0;
                 }
+                program->programCounter += SKIP_PER_INSTR;
                 break;
             }
             case OP_CMPNE:{
@@ -281,6 +282,7 @@ boolean vm_execute_program(VmProgram* program){
                 } else {
                     vmCPU.registers[arg1] = 0;
                 }
+                program->programCounter += SKIP_PER_INSTR;
                 break;
             }
             case OP_CMPGT:{
@@ -296,6 +298,7 @@ boolean vm_execute_program(VmProgram* program){
                 } else {
                     vmCPU.registers[arg1] = 0;
                 }
+                program->programCounter += SKIP_PER_INSTR;
                 break;
             }
             case OP_CMPLT:{
@@ -311,6 +314,7 @@ boolean vm_execute_program(VmProgram* program){
                 } else {
                     vmCPU.registers[arg1] = 0;
                 }
+                program->programCounter += SKIP_PER_INSTR;
                 break;
             }
             default:{
